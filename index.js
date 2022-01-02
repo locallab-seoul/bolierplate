@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const port = 8000
 // const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 
 const config = require('./config/key')
 const { User } = require('./models/User')
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }))
 // application/json 을 분석해서 가져올 수 있게?
 // app.use(bodyParser.json())
 app.use(express.json())
+app.use(cookieParser())
 
 
 const mongoose = require('mongoose')
@@ -41,7 +43,7 @@ app.post('/register', (req, res) => {
 
 app.post('/login', (req, res) => {
     // 요청된 이메일을 데이터베이스에서 찾는다
-    User.findOne({email: req.body.email}, (err, user) => {
+    User.findOne({"email": req.body.email}, (err, user) => {
         if(!user) {
             return res.json({
                 loginSuccess: false,
@@ -57,6 +59,14 @@ app.post('/login', (req, res) => {
                 })
 
             // 비밀번호까지 맞다면 토큰을 생성하기
+            user.generateToken((err, user) => {
+                if(err) return res.status(400).send(err)
+
+                // 토큰을 저장한다. 쿠키 or 로컬스토리지
+                res.cookie("x_auth", user.token)
+                .status(200)
+                .json({ loginSuccess: true, userId: user._id })
+            })
         })
     })
 
