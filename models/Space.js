@@ -5,6 +5,13 @@ const spaceSchema = mongoose.Schema({
         type: String,
         maxlength: 50
     },
+    type: {
+        type: String,
+    },
+    keywords: {
+        type: Array,
+        default: []
+    },
     description: {
         type: String
     },
@@ -16,11 +23,6 @@ const spaceSchema = mongoose.Schema({
         trim: true
    },
    site: {
-        type: String,
-        lowercase: true,
-        trim: true
-   },
-   blog: {
         type: String,
         lowercase: true,
         trim: true
@@ -41,6 +43,13 @@ const spaceSchema = mongoose.Schema({
    },
    closed_time: {
        type: String
+   },
+   rep_image: {
+       type: String
+   },
+   images: {
+       type : Array,
+       default: []
    }
 })
 
