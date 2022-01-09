@@ -45,5 +45,17 @@ router.post('/list', (req, res) => {
         return res.status(200).json({ success: true, SpacesInfo, postSize: SpacesInfo.length })
     })
   })
+  
+  router.get('/space_by_id', (req, res) => {
+
+    let spaceId = req.query.id
+  
+    Space.find({ _id: spaceId })
+      .exec((err, space) => {
+        if (err) return res.status(400).send(err)
+        return res.status(200).send({success: true, space})
+      })
+  
+  })
 
 module.exports = router

@@ -48,4 +48,16 @@ router.post('/list', (req, res) => {
     })
   })
 
+  router.get('/news_by_id', (req, res) => {
+
+    let newsId = req.query.id
+  
+    News.find({ _id: newsId })
+      .exec((err, news) => {
+        if (err) return res.status(400).send(err)
+        return res.status(200).send({success: true, news})
+      })
+  
+  })
+
 module.exports = router
