@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser')
 const config = require('./config/key')
 const { auth } = require('./middleware/auth')
 const { User } = require('./models/User')
+const { Space } = require('./models/Space')
+const { News } = require('./models/News')
 
 // application/x-www-form-urllencoded 데이터를 분석해서 가져올 수 있게?
 // app.use(bodyParser.urlencoded({extended: true}));
@@ -97,6 +99,44 @@ app.get('/api/users/logout', auth, (req,  res) => {
         })
     })
 })
+
+app.post('/api/spaces/create', (req, res) => {
+
+    const space = new Space(req.body)
+
+    space.save((err) => {
+        if (err) return res.status(400).json({ success: false, err})
+        return res.status(200).json({ success: true })
+      })
+})
+
+app.post('/api/spaces/list', (req, res) => {
+
+    Space.find()
+    .exec((err, SpacesInfo) => {
+        if (err) return res.status(400).json({ success: false, err })
+        return res.status(200).json({ success: true, SpacesInfo, postSize: SpacesInfo.length })
+    })
+  })
+
+app.post('/api/newses/create', (req, res) => {
+
+    const news = new News(req.body)
+
+    news.save((err) => {
+        if (err) return res.status(400).json({ success: false, err})
+        return res.status(200).json({ success: true })
+      })
+})
+
+app.post('/api/newses/list', (req, res) => {
+
+    News.find()
+    .exec((err, NewsesInfo) => {
+        if (err) return res.status(400).json({ success: false, err })
+        return res.status(200).json({ success: true, NewsesInfo, postSize: NewsesInfo.length })
+    })
+  })
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
