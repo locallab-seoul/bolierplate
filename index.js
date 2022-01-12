@@ -17,6 +17,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
 
+app.use(cors())
+
 app.use('/api/space', require('./routes/space'))
 app.use('/api/news', require('./routes/news'))
 
