@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser')
 const config = require('./config/key')
 const { auth } = require('./middleware/auth')
 const { User } = require('./models/User')
+const cors = require('cors')
 
 // application/x-www-form-urllencoded 데이터를 분석해서 가져올 수 있게?
 // app.use(bodyParser.urlencoded({extended: true}));
