@@ -38,7 +38,7 @@ router.post('/create', (req, res) => {
       })
 })
 
-router.post('/list', (req, res) => {
+router.get('/list', (req, res) => {
     Space.find()
     .exec((err, SpacesInfo) => {
         if (err) return res.status(400).json({ success: false, err })

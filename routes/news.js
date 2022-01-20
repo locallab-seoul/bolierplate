@@ -39,7 +39,7 @@ router.post('/create', (req, res) => {
       })
 })
 
-router.post('/list', (req, res) => {
+router.get('/list', (req, res) => {
 
     News.find()
     .exec((err, NewsesInfo) => {
