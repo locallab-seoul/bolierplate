@@ -23,6 +23,9 @@ app.use(cors())
 app.use('/api/space', require('./routes/space'))
 app.use('/api/news', require('./routes/news'))
 
+app.use('/uploads/space', express.static('uploads/space'));
+app.use('/uploads/news', express.static('uploads/news'));
+
 
 const mongoose = require('mongoose')
 mongoose.connect(config.mongoURI)
