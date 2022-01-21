@@ -22,6 +22,12 @@ const spaceSchema = mongoose.Schema({
     contents: {
         type: String
    },
+    address: {
+        type: String
+   },
+    detail_address: {
+        type: String
+   },
    tel: {
         type: String,
         trim: true
