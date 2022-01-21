@@ -8,6 +8,10 @@ const spaceSchema = mongoose.Schema({
     type: {
         type: String,
     },
+    rep_keywords: {
+        type: Array,
+        default: []
+    },
     keywords: {
         type: Array,
         default: []
