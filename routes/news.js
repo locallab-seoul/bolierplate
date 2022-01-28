@@ -60,4 +60,16 @@ router.get('/list', (req, res) => {
   
   })
 
+  router.get('/delete_by_id', (req, res) => {
+
+    let newsId = req.query.id
+  
+    Space.findByIdAndRemove(newsId)
+      .exec((err) => {
+        if (err) return res.status(400).send(err)
+        return res.status(200).send({success: true})
+      })
+  
+  })
+
 module.exports = router
